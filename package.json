@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./server/index.ts",
+    "start:dev": "nodemon ./server/index.ts"
   },
   "repository": {
     "type": "git",
@@ -23,6 +25,6 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
-      "ws": "^8.8.0"
+    "ws": "^8.8.0"
   }
 }
