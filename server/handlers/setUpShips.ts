@@ -1,4 +1,4 @@
-import { db } from '../inMemoryDB';
+import { BOARD_SIZE, SHIPS } from '../constants';
 
 export function setUpShips(gameId: number, wsClientLink: WebSocket, connectionId: string){
 
@@ -7,7 +7,8 @@ export function setUpShips(gameId: number, wsClientLink: WebSocket, connectionId
     data: JSON.stringify({
       gameId,
       connectionId,
-      emptyMatrix: db.get(gameId).players.get(connectionId).ships
+      fieldSize: BOARD_SIZE,
+      shipsAvailable: SHIPS
     })
   });
 
