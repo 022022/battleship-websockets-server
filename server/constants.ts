@@ -6,3 +6,9 @@ export const SHIPS = [
   {type: 3, quantity: 2},
   {type: 4, quantity: 1}
 ]
+
+export enum PLAYER_STATUS {
+  'SETTING_UP' = 'settingUp',
+  'WAITING' = 'startedGame',
+  'STARTED_GAME' = 'startedGame'
+}

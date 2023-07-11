@@ -2,7 +2,8 @@ import { createGame } from './createGame';
 import { v4 } from 'uuid';
 import { joinGame } from './joinGame';
 import { setUpShips } from './setUpShips';
-import { db } from '../inMemoryDB';
+import { startGame } from './startGame';
+import { attack } from './attack';
 
 export function onConnect(wsClient: WebSocket) {
   const connectionId = v4();
@@ -31,11 +32,17 @@ export function onConnect(wsClient: WebSocket) {
         break;
       }
       case 'set_up_ships': {
-        const response = setUpShips(data.gameId, wsClient, connectionId);
+        const response = setUpShips(data.gameId, connectionId);
         wsClient.send(response);
-        console.log(db);
         break;
-
+      }
+      case 'start_game': {
+        startGame(data.gameId, data.startMarkedCells, connectionId);
+        break;
+      }
+      case 'attack': {
+        attack(data.gameId, data.attackedCell, connectionId);
+        break;
       }
     }
 

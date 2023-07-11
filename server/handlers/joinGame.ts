@@ -1,4 +1,4 @@
-import { BOARD_SIZE } from '../constants';
+import { PLAYER_STATUS } from '../constants';
 import { db } from '../inMemoryDB';
 import { setUpShips } from './setUpShips';
 
@@ -27,10 +27,23 @@ export function joinGame({secondPlayerName, accessCode}: {secondPlayerName: stri
     return toClient;
   }
 
-  const ships = Array(BOARD_SIZE).fill(0).map(item => Array(BOARD_SIZE).fill(0));
-  db.get(gameId).players.set(connectionId, {name: secondPlayerName, ships, ws: wsClientLink})
+  const myShipCells:  string[] = [];
+  const myWoundedCells: string[] = [];
+  const opponentsEmptyCells: string[] = [];
+  const opponentsWoundedCells: string[] = [];
 
-  const toClient = setUpShips(gameId, wsClientLink, connectionId);
+  db.get(gameId).players.set(connectionId, {
+    name: secondPlayerName,
+    myShipCells,
+    myWoundedCells,
+    opponentsEmptyCells,
+    opponentsWoundedCells,
+    ws: wsClientLink,
+    status: PLAYER_STATUS.SETTING_UP,
+    connectionId: connectionId,
+  });
+
+  const toClient = setUpShips(gameId, connectionId);
 
   return toClient;
 }
