@@ -9,20 +9,22 @@ export function startGame(gameId: number, startMarkedCells: string[], connection
 
   thisPlayer.myShipCells = [...startMarkedCells];
 
-  if(anotherPlayer?.status === PLAYER_STATUS.SETTING_UP){
+  if(!anotherPlayer || anotherPlayer?.status === PLAYER_STATUS.SETTING_UP){
     thisPlayer.status = PLAYER_STATUS.WAITING;
-
-    anotherPlayer.ws.send(JSON.stringify({type: "another_player_started", data: JSON.stringify({})}));
 
     const toThisPlayer = JSON.stringify({
       type: "another_player_not_started",
-      data: JSON.stringify({anotherPlayerName: anotherPlayer.name})
+      data: JSON.stringify({})
     });
 
     thisPlayer.ws.send(toThisPlayer);
+
+    if(anotherPlayer?.status === PLAYER_STATUS.SETTING_UP){
+      anotherPlayer.ws.send(JSON.stringify({type: "another_player_started", data: JSON.stringify({})}));
+    }
   }
 
-  else if(anotherPlayer?.status === PLAYER_STATUS.WAITING){
+  if(anotherPlayer?.status === PLAYER_STATUS.WAITING){
 
     thisPlayer.status = PLAYER_STATUS.STARTED_GAME;
     anotherPlayer.status = PLAYER_STATUS.STARTED_GAME;
@@ -30,7 +32,6 @@ export function startGame(gameId: number, startMarkedCells: string[], connection
     db.get(gameId).turn = connectionId;
 
     attackResult(gameId, thisPlayer, anotherPlayer);
-    return;
   }
 
   return;

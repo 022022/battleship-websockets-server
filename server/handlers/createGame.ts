@@ -5,10 +5,6 @@ export function createGame({initiatorPleerName}: {initiatorPleerName: string}, w
   const gameId = db.size + 1;
   const accessCode = Math.floor(Math.random() * 1000000);
 
-
-  //const ships = Array(BOARD_SIZE).fill(0).map(item => Array(BOARD_SIZE).fill(0));
-
-
   const players = new Map();
 
   const myShipCells:  string[] = [];
@@ -26,6 +22,7 @@ export function createGame({initiatorPleerName}: {initiatorPleerName: string}, w
     status: PLAYER_STATUS.SETTING_UP,
     connectionId: connectionId
   })
+
   db.set(gameId, {players, turn: connectionId, winner: null, accessCode})
 
   const toClient = JSON.stringify({
