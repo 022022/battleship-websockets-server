@@ -1,9 +1,9 @@
-import { createGame } from './createGame';
+import { createGame } from './handlers/createGame';
 import { v4 } from 'uuid';
-import { joinGame } from './joinGame';
-import { setUpShips } from './setUpShips';
-import { startGame } from './startGame';
-import { attack } from './attack';
+import { joinGame } from './handlers/joinGame';
+import { setUpShips } from './handlers/setUpShips';
+import { startGame } from './handlers/startGame';
+import { attack } from './handlers/attack';
 
 export function onConnect(wsClient: WebSocket) {
   const connectionId = v4();
