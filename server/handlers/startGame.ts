@@ -3,7 +3,7 @@ import { db } from '../inMemoryDB';
 import { Player } from '../types';
 import { attackResult } from './attackResult';
 
-export function startGame(gameId: number, startMarkedCells: string[], connectionId: string){
+export async function startGame(gameId: number, startMarkedCells: string[], connectionId: string){
   const anotherPlayer = Array.from<Player>(db.get(gameId).players.values()).find((player) => player.connectionId !== connectionId)
   const thisPlayer = db.get(gameId).players.get(connectionId);
 

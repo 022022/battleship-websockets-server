@@ -3,7 +3,7 @@ import { Player } from '../types';
 import { attackResult } from './attackResult';
 import { endGame } from './endGame';
 
-export function attack(gameId: number, attackedCell: string, connectionId: string){
+export async function attack(gameId: number, attackedCell: string, connectionId: string){
   const anotherPlayer = Array.from<Player>(db.get(gameId).players.values()).find((player) => player.connectionId !== connectionId)
   if(!anotherPlayer) return;
 

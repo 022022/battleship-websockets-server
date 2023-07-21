@@ -1,7 +1,8 @@
+import { WebSocket } from 'ws';
 import { PLAYER_STATUS } from '../constants';
-import { db } from '../inMemoryDB';
+import { db, wsToGames } from '../inMemoryDB';
 
-export function createGame({initiatorPleerName}: {initiatorPleerName: string}, wsClientLink: WebSocket, connectionId: string){
+export async function createGame({initiatorPleerName}: {initiatorPleerName: string}, wsClientLink: WebSocket, connectionId: string){
   const gameId = db.size + 1;
   const accessCode = Math.floor(Math.random() * 1000000);
 
@@ -23,7 +24,9 @@ export function createGame({initiatorPleerName}: {initiatorPleerName: string}, w
     connectionId: connectionId
   })
 
-  db.set(gameId, {players, turn: connectionId, winner: null, accessCode})
+  db.set(gameId, {players, turn: connectionId, winner: null, accessCode});
+
+  wsToGames.set(wsClientLink, gameId);
 
   const toClient = JSON.stringify({
       type: "provide_access_code",

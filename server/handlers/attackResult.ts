@@ -1,7 +1,7 @@
 import { db } from '../inMemoryDB';
 import { Player } from '../types';
 
-export function attackResult(gameId: number, player1: Player, player2: Player){
+export async function attackResult(gameId: number, player1: Player, player2: Player){
     const player2Response = JSON.stringify({
       type: "attack_result",
       data: JSON.stringify({

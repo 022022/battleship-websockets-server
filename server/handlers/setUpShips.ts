@@ -1,6 +1,6 @@
 import { BOARD_SIZE, SHIPS } from '../constants';
 
-export function setUpShips(gameId: number, connectionId: string){
+export async function setUpShips(gameId: number, connectionId: string){
 
   const toClient = JSON.stringify({
     type: "start_setup_ships",

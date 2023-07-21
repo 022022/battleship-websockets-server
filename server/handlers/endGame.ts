@@ -1,6 +1,9 @@
+import { db } from '../inMemoryDB';
 import { Player } from '../types';
 
-export function endGame(gameId: number, winner: Player, player2: Player){
+export async function endGame(gameId: number, winner: Player, player2: Player){
+      db.get(gameId).winner = winner.connectionId;
+
       const winnerResponse = JSON.stringify({
         type: "end_game",
         data: JSON.stringify({

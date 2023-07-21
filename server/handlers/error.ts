@@ -1,4 +1,4 @@
-export function error(){
+export async function error(){
 
   const toClient = JSON.stringify({
     type: "server_error",

@@ -1,8 +1,9 @@
+import { WebSocket } from 'ws';
 import { PLAYER_STATUS } from '../constants';
-import { db } from '../inMemoryDB';
+import { db, wsToGames } from '../inMemoryDB';
 import { setUpShips } from './setUpShips';
 
-export function joinGame({secondPlayerName, accessCode}: {secondPlayerName: string, accessCode: string}, wsClientLink: WebSocket, connectionId: string){
+export async function joinGame({secondPlayerName, accessCode}: {secondPlayerName: string, accessCode: string}, wsClientLink: WebSocket, connectionId: string){
 
   const [gameId, code] = accessCode.split('-').map(Number);
 
@@ -42,6 +43,8 @@ export function joinGame({secondPlayerName, accessCode}: {secondPlayerName: stri
     status: PLAYER_STATUS.SETTING_UP,
     connectionId: connectionId,
   });
+
+  wsToGames.set(wsClientLink, gameId);
 
   const toClient = setUpShips(gameId, connectionId);
 

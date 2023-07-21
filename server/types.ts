@@ -1,3 +1,4 @@
+import { WebSocket } from 'ws';
 import { PLAYER_STATUS } from './constants';
 
 export interface Player {
@@ -10,3 +11,5 @@ export interface Player {
   status: PLAYER_STATUS
   connectionId: string;
 }
+
+
