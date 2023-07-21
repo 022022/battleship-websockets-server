@@ -1,0 +1,32 @@
+{
+  "name": "battleship-websockets-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./server/index.ts",
+    "start:dev": "nodemon ./server/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/022022/battleship-websockets-server.git"
+  },
+  "author": "022022",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/022022/battleship-websockets-server/issues"
+  },
+  "homepage": "https://github.com/022022/battleship-websockets-server#readme",
+  "devDependencies": {
+    "@types/uuid": "^9.0.2",
+    "@types/ws": "^8.5.5",
+    "nodemon": "^2.0.16",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "uuid": "^9.0.0",
+    "ws": "^8.8.0"
+  }
+}
